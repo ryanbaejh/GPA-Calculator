@@ -5,30 +5,33 @@
         <script src="script.js"></script>
     </head>
     <body>
-        <h1>RU Screwed?? GPA Calculator</h1>
-        <div class="semester-calc">
-            <h2>Calculate for semester</h2>
-            <p class="errmsg"><p>
-            <div class="inputfield" id="input-field-1">
-                <input class="class-name" type="text" placeholder="Class 1">
-                <input class="grade-val" type="text" placeholder="Grade">
-                <input class="credit-val" type="text" placeholder="Credits">
-            </div>
-            <div class="inputfield" id="input-field-2">
-                <input class="class-name" type="text" placeholder="Class 2">
-                <input class="grade-val" type="text" placeholder="Grade">
-                <input class="credit-val" type="text" placeholder="Credits">
-            </div>
-            <div class="inputfield" id="input-field-3">
-                <input class="class-name" type="text" placeholder="Class 3">
-                <input class="grade-val" type="text" placeholder="Grade">
-                <input class="credit-val" type="text" placeholder="Credits">
-            </div>
-            <button id="add-btn" onclick="addClass()">Add Class</button>
-            <button id="remove-btn" onclick="removeClass()">Remove Class</button>
-            <button id="clear-btn" onclick="clearClass()">Clear Classes</button>
-            <button id="calculate-gpa" onclick="calculateGPA()">Calculate!</button>
+        <div class="header-container">
+            <h1 id = "header-text">RU Screwed?? GPA Calculator</h1>
         </div>
-        <p id="final-gpa-message">Your final GPA is: <p>
+        <div class = "content">
+            <div class="semester-calc">
+                <h2>Calculate for semester</h2>
+                <div class="inputfield" id="input-field-1">
+                    <input class="class-name" type="text" placeholder="Class 1">
+                    <input class="grade-val" type="text" placeholder="Grade">
+                    <input class="credit-val" type="text" placeholder="Credits">
+                </div>
+                <div class="inputfield" id="input-field-2">
+                    <input class="class-name" type="text" placeholder="Class 2">
+                    <input class="grade-val" type="text" placeholder="Grade">
+                    <input class="credit-val" type="text" placeholder="Credits">
+                </div>
+                <div class="inputfield" id="input-field-3">
+                    <input class="class-name" type="text" placeholder="Class 3">
+                    <input class="grade-val" type="text" placeholder="Grade">
+                    <input class="credit-val" type="text" placeholder="Credits">
+                </div>
+                <button id="add-btn" onclick="addClass()">Add Class</button>
+                <button id="remove-btn" onclick="removeClass()">Remove Class</button>
+                <button id="clear-btn" onclick="clearClass()">Clear Classes</button>
+                <button id="calculate-gpa" onclick="calculateGPA()">Calculate!</button>
+            </div>
+            <p id="final-gpa-message">Your final GPA is: <p>
+        </div>
     </body>
 </html>
