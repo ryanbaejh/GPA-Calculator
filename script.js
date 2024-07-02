@@ -1,4 +1,14 @@
 
+function openSection(sectionId) {
+    let section = document.getElementById(sectionId);
+    section.style.display = "block";  // Or "flex" or "grid" depending on your layout
+}
+
+function closeSection(sectionId) {
+    let section = document.getElementById(sectionId);
+    section.style.display = "none";
+}
+
 function addClass(){
     let container = document.getElementById("input-field-1").parentNode;
     let fieldLength = container.getElementsByClassName("inputfield").length;
@@ -31,11 +41,36 @@ function calculateGPA(){
     let gradeInputs = container.getElementsByClassName("grade-val");
     let creditInputs = container.getElementsByClassName("credit-val");
     let calculatedMessage = document.getElementById("final-gpa-message");
+
     //Calculate Grade*Credit
     let qualityPoints = 0;
     let totalQP = 0;
     for(let i = 0; i < gradeInputs.length; i++){
+        let rawGrade = gradeInputs[i].value;
         let grade = parseFloat(gradeInputs[i].value);
+        if(isNaN(rawGrade)){
+            if(rawGrade == 'A'||rawGrade == 'a'){
+                grade = 4.0;
+            }
+            else if(rawGrade == 'B+'||rawGrade == 'b+'){
+                grade = 3.5;
+            }
+            else if(rawGrade == 'B'||rawGrade == 'b'){
+                grade = 3.0;
+            }
+            else if(rawGrade == 'C+'||rawGrade == 'c+'){
+                grade = 2.5;
+            }
+            else if(rawGrade == 'C'||rawGrade == 'c'){
+                grade = 2.0;
+            }
+            else if(rawGrade == 'D'||rawGrade == 'd'){
+                grade = 1.0;
+            }
+            else if(rawGrade == 'F'||rawGrade == 'f'){
+                grade = 0;
+            }
+        }
         let credits = parseFloat(creditInputs[i].value);
         if(!isNaN(grade) && !isNaN(credits)){
             qualityPoints = grade*credits;
@@ -44,6 +79,7 @@ function calculateGPA(){
         }
     }
     console.log(totalQP);
+
     //Calculate Total Grade
     let totalGradeVal = 0;
     for(let i = 0; i < gradeInputs.length; i++){
@@ -53,6 +89,7 @@ function calculateGPA(){
         }
     }
     console.log("totalGrade: " + totalGradeVal);
+
     //Calculate Total Credits
     let totalCreditVal = 0;
     for(let i = 0; i < creditInputs.length; i++){
@@ -62,6 +99,7 @@ function calculateGPA(){
         }
     }
     console.log("totalCredits: " + totalCreditVal);
+
     //Calculate Final GPA
     let finalGPA = totalQP/totalCreditVal;
     calculatedMessage.innerText = "Your final GPA is: ";

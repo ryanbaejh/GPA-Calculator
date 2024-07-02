@@ -2,13 +2,16 @@
 <html>
     <head>
         <link rel="stylesheet" href="styles.css">
-        <script src="script.js"></script>
     </head>
     <body>
         <div class="header-container">
             <h1 id = "header-text">RU Screwed?? GPA Calculator</h1>
         </div>
-        <div class = "content">
+        <button onclick="openSection('add-semester-page')">Add Semester</button>
+
+
+        <div id="add-semester-page">
+            <button id="back-btn" onclick="closeSection('add-semester-page')">Back</button>
             <div class="semester-calc">
                 <h2>Calculate for semester</h2>
                 <div class="inputfield" id="input-field-1">
@@ -30,8 +33,12 @@
                 <button id="remove-btn" onclick="removeClass()">Remove Class</button>
                 <button id="clear-btn" onclick="clearClass()">Clear Classes</button>
                 <button id="calculate-gpa" onclick="calculateGPA()">Calculate!</button>
+                <div>
+                    <button id="save-sem-btn" onclick="">Save</button>
+                </div>
             </div>
-            <p id="final-gpa-message">Your final GPA is: <p>
+            <p id="final-gpa-message">Your final GPA is: </p>
         </div>
+        <script src="script.js"></script>
     </body>
 </html>

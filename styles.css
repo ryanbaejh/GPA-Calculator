@@ -4,9 +4,10 @@ body{
     padding: 0px;
 }
 
-.content{
+#add-semester-page{
     margin-left: 40px;
     margin-right: auto;
+    display: none;
 }
 
 #header-text{
@@ -44,9 +45,9 @@ button{
     margin-bottom: 10px;
 }
 
-
-.class-name{
-
+.semester-calc:nth-child(-n + 3){
+    display: inline;
 }
+
 
 
