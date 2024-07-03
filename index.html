@@ -7,38 +7,89 @@
         <div class="header-container">
             <h1 id = "header-text">RU Screwed?? GPA Calculator</h1>
         </div>
-        <button onclick="openSection('add-semester-page')">Add Semester</button>
 
+        <!--MAIN PAGE-->
+        <div id="main-page">
+            <div class = "contents">
+                <h2>Current Cumulatve GPA: </h2>
+                <div>
+                    <button onclick="openSection('saved-grades'); closeSection('main-page')">See Saved Grades</button>
+                    <button onclick="openSection('semester-page'); closeSection('main-page')">Calculate for Semester</button>
+                    <button onclick="openSection('class-page'); closeSection('main-page')">Calculate for Class</button>
+                </div>
+            </div>
+        </div>
 
-        <div id="add-semester-page">
-            <button id="back-btn" onclick="closeSection('add-semester-page')">Back</button>
-            <div class="semester-calc">
+        <!--SAVED GRADES-->
+        <div class="subpage" id="saved-grades">
+            <button id="back-btn" onclick="closeSection('saved-grades'); openSection('main-page')">Back</button>
+
+        </div>
+
+        <!--SEMESTER CALCULATOR-->
+        <div class="subpage" id="semester-page">
+            <button id="back-btn" onclick="closeSection('semester-page'); openSection('main-page')">Back</button>
+            <div class="contents">
                 <h2>Calculate for semester</h2>
-                <div class="inputfield" id="input-field-1">
-                    <input class="class-name" type="text" placeholder="Class 1">
-                    <input class="grade-val" type="text" placeholder="Grade">
-                    <input class="credit-val" type="text" placeholder="Credits">
+                <div id="class-container">
+                    <!--input field for classes added here-->
                 </div>
-                <div class="inputfield" id="input-field-2">
-                    <input class="class-name" type="text" placeholder="Class 2">
-                    <input class="grade-val" type="text" placeholder="Grade">
-                    <input class="credit-val" type="text" placeholder="Credits">
+
+                <template id="class-template">
+                    <div class="inputfield" id="input-field-1">
+                        <input class="class-name" type="text" placeholder="Class X">
+                        <input class="grade-val" type="text" placeholder="Grade">
+                        <input class="credit-val" type="text" placeholder="Credits">
+                    </div>
+                </template>
+                
+                <div>
+                    <button onclick="addClass()">Add Class</button>
+                    <button onclick="removeClass()">Remove Class</button>
+                    <button onclick="clearClass()">Clear Classes</button>
+                    <button onclick="calculateGPA()">Calculate!</button>
                 </div>
-                <div class="inputfield" id="input-field-3">
-                    <input class="class-name" type="text" placeholder="Class 3">
-                    <input class="grade-val" type="text" placeholder="Grade">
-                    <input class="credit-val" type="text" placeholder="Credits">
-                </div>
-                <button id="add-btn" onclick="addClass()">Add Class</button>
-                <button id="remove-btn" onclick="removeClass()">Remove Class</button>
-                <button id="clear-btn" onclick="clearClass()">Clear Classes</button>
-                <button id="calculate-gpa" onclick="calculateGPA()">Calculate!</button>
+
                 <div>
                     <button id="save-sem-btn" onclick="">Save</button>
                 </div>
             </div>
             <p id="final-gpa-message">Your final GPA is: </p>
         </div>
+
+        <!--CLASS CALCULATOR-->
+        <div class="subpage" id="class-page">
+            <button id="back-btn" onclick="closeSection('class-page'); openSection('main-page')">Back</button>
+            <div class="contents">
+                <h2>Calculate for semester</h2>
+
+                <div id="assignment-container">
+                    <!--input field for classes added here-->
+                </div>
+
+                <template id="assignment-template">
+                    <div class="inputfield" id="a-input-field">
+                        <input class="assignment-name" type="text" placeholder="Assignment X">
+                        <input class="grade-val" type="text" placeholder="Grade">
+                        <input class="Weight-val" type="text" placeholder="Weight">
+                    </div>
+                </template>
+                
+                <div>
+                    <button onclick="addAssignment()">Add Class</button>
+                    <button onclick="removeAssignment()">Remove Class</button>
+                    <button onclick="clearAssignment()">Clear Classes</button>
+                    <button onclick="calculateGrade()">Calculate!</button>
+                </div>
+
+                <div>
+                    <button id="save-sem-btn" onclick="">Save</button>
+                </div>
+            </div>
+            <p id="final-gpa-message">Your final Grade is: </p>
+        </div>
+
+
         <script src="script.js"></script>
     </body>
 </html>

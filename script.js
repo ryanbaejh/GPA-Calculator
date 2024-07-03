@@ -1,7 +1,12 @@
+addClass();
+addClass();
+addClass();
+addAssignment();
+addAssignment();
 
 function openSection(sectionId) {
     let section = document.getElementById(sectionId);
-    section.style.display = "block";  // Or "flex" or "grid" depending on your layout
+    section.style.display = "block"; 
 }
 
 function closeSection(sectionId) {
@@ -10,30 +15,63 @@ function closeSection(sectionId) {
 }
 
 function addClass(){
-    let container = document.getElementById("input-field-1").parentNode;
-    let fieldLength = container.getElementsByClassName("inputfield").length;
-    let inputField = document.getElementById("input-field-1");
-    let clone = inputField.cloneNode(true);
-    clone.id = "input-field-" + (fieldLength + 1);
+    const container = document.getElementById("class-container");
+    const template = document.getElementById("class-template");
+    const clone = document.importNode(template.content, true);
+    const fieldLength = container.getElementsByClassName("inputfield").length;
     let classNumber = fieldLength + 1;
-    let inputs = clone.getElementsByTagName("input");
-    inputs[0].placeholder = "Class "+ classNumber;
-    inputs[0].value = "";
-    inputs[1].value = "";
-    inputs[2].value = "";
-    let addButton = document.getElementById("add-btn");
-    container.insertBefore(clone, addButton);
+    clone.querySelector(".class-name").placeholder = "Class " + classNumber;
+    container.appendChild(clone);
 }
 
 function removeClass(){
-    let container = document.getElementById("input-field-1").parentNode;
-    let fieldLength = container.getElementsByClassName("inputfield").length;
-    let removedClassNum = "input-field-" + fieldLength;
-    let removedClass = document.getElementById(removedClassNum);
-    console.log("Removed: " + removedClass);
-    if(fieldLength != 1){
-        removedClass.remove();
+    const container = document.getElementById("class-container");
+    const inputs = container.getElementsByClassName("inputfield");
+    if (inputs.length > 1) {
+        container.removeChild(inputs[inputs.length - 1]);
     }
+}
+
+function clearClass(){
+    const container = document.getElementById("class-container");
+    const inputFields = container.getElementsByClassName("inputfield");
+
+    Array.from(inputFields).forEach(fields => {
+        let inputs = fields.getElementsByTagName("input");
+        Array.from(inputs).forEach(input => {
+            input.value = "";
+        });
+    })
+}
+
+function addAssignment(){
+    const container = document.getElementById("assignment-container");
+    const template = document.getElementById("assignment-template");
+    const clone = document.importNode(template.content, true);
+    const fieldLength = container.getElementsByClassName("inputfield").length;
+    let assignmentNumber = fieldLength + 1;
+    clone.querySelector(".assignment-name").placeholder = "Assignment " + assignmentNumber;
+    container.appendChild(clone);
+}
+
+function removeAssignment(){
+    const container = document.getElementById("assignment-container");
+    const inputs = container.getElementsByClassName("inputfield");
+    if (inputs.length > 1) {
+        container.removeChild(inputs[inputs.length - 1]);
+    }
+}
+
+function clearAssignment(){
+    const container = document.getElementById("assignment-container");
+    const inputFields = container.getElementsByClassName("inputfield");
+
+    Array.from(inputFields).forEach(fields => {
+        let inputs = fields.getElementsByTagName("input");
+        Array.from(inputs).forEach(input => {
+            input.value = "";
+        });
+    })
 }
 
 function calculateGPA(){
