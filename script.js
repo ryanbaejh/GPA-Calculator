@@ -1,8 +1,28 @@
-addClass();
-addClass();
-addClass();
-addAssignment();
-addAssignment();
+start();
+let previousSection = "";
+let currentSection = "main-page";
+const backBtn = document.getElementsByClassName("back-btn");
+
+function start(){
+    const classNum = 3;
+    const asmntNum = 3;
+    for(let i=0; i<classNum; i++){
+        addClass();
+    }
+    for(let i=0; i<asmntNum; i++){
+        addAssignment();
+    }
+}
+
+function moveFromTo(current, to){
+    closeSection(current);
+    previousSection = current;
+    openSection(to);
+    currentSection = to;
+    
+    console.log(to+", "+current)
+    console.log(currentSection+", "+previousSection)
+}
 
 function openSection(sectionId) {
     let section = document.getElementById(sectionId);
@@ -13,6 +33,20 @@ function closeSection(sectionId) {
     let section = document.getElementById(sectionId);
     section.style.display = "none";
 }
+
+document.querySelectorAll('.back-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        console.log(currentSection+", "+previousSection)
+        closeSection(currentSection);
+        openSection(previousSection);
+    });
+});
+
+/*function back(){
+    console.log(currentSection+", "+previousSection)
+    closeSection(currentSection);
+    openSection(previousSection);
+}*/
 
 function addClass(){
     const container = document.getElementById("class-container");
@@ -61,6 +95,7 @@ function removeAssignment(){
         container.removeChild(inputs[inputs.length - 1]);
     }
 }
+
 
 function clearAssignment(){
     const container = document.getElementById("assignment-container");
@@ -145,3 +180,46 @@ function calculateGPA(){
     
     
 }
+
+function calculateGrade() {
+    const container = document.getElementById("a-input-field").parentNode;
+    const gradeInputs = container.getElementsByClassName("grade-val");
+    const weightInputs = container.getElementsByClassName("weight-val");
+    let calculatedMessage = document.getElementById("final-grade-message");
+    let finalGrade = 0;
+
+    for (let i = 0; i < gradeInputs.length; i++) {
+        let rawGrade = gradeInputs[i].value;
+        let weight = weightInputs[i].value;
+        let asmntGrade = 0;
+        let numericWeight;
+        if (rawGrade.includes('/')) {
+            const [numerator, denominator] = rawGrade.split('/').map(Number);
+            if (isNaN(numerator) || isNaN(denominator) || denominator === 0) {
+                console.log("wrong input");
+                continue;  
+            }
+            asmntGrade = (numerator / denominator) * 100;
+        } else {
+            asmntGrade = parseFloat(rawGrade);
+        }
+        if (weight.includes('/')) {
+            const [numerator, denominator] = weight.split('/').map(Number);
+            if (isNaN(numerator) || isNaN(denominator) || denominator === 0) {
+                console.log("wrong input");
+                continue;  
+            }
+            numericWeight = numerator / denominator;
+        } else {
+            numericWeight = parseFloat(weight);
+            if (numericWeight > 1) {
+                numericWeight = numericWeight / 100;
+            }
+        }
+
+        finalGrade += numericWeight * asmntGrade;
+    }
+
+    calculatedMessage.innerText = "Your final grade is: " + finalGrade;
+}
+
