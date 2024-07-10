@@ -1,7 +1,21 @@
-start();
-let previousSection = "";
+
+let previousSections = [];
 let currentSection = "main-page";
 const backBtn = document.getElementsByClassName("back-btn");
+const saveBtn = document.getElementsByClassName("save-btn");
+
+//Add Year Button Vars
+const addYrBtn = document.getElementById('add-year-btn');
+const yrContainer = document.getElementById('year-container');
+const yrTemplate = document.getElementById('yr-template');
+
+//Semester Calculator Vars
+const classContainer = document.getElementById("class-container");
+const classTemplate = document.getElementById("class-template");
+
+//Class Calculator Vars
+const asmntContainer = document.getElementById("assignment-container");
+const asmntTemplate = document.getElementById("assignment-template");
 
 function start(){
     const classNum = 3;
@@ -12,16 +26,16 @@ function start(){
     for(let i=0; i<asmntNum; i++){
         addAssignment();
     }
+    
 }
 
-function moveFromTo(current, to){
-    closeSection(current);
-    previousSection = current;
+function moveTo(to){
+    closeSection(currentSection);
+    console.log(currentSection + "closed")
+    previousSections.push(currentSection);
     openSection(to);
+    console.log(to + "opened")
     currentSection = to;
-    
-    console.log(to+", "+current)
-    console.log(currentSection+", "+previousSection)
 }
 
 function openSection(sectionId) {
@@ -34,42 +48,51 @@ function closeSection(sectionId) {
     section.style.display = "none";
 }
 
+function moveBack(){
+    previousSection = previousSections.pop();
+    closeSection(currentSection);
+    openSection(previousSection);
+    currentSection = previousSection;
+}
+
 document.querySelectorAll('.back-btn').forEach(button => {
     button.addEventListener('click', function() {
-        console.log(currentSection+", "+previousSection)
-        closeSection(currentSection);
-        openSection(previousSection);
+        moveBack();
+        closeSection("save-area")
     });
 });
 
-/*function back(){
-    console.log(currentSection+", "+previousSection)
-    closeSection(currentSection);
-    openSection(previousSection);
-}*/
+document.querySelectorAll('.edit-btn').forEach(button => {
+    button.addEventListener('click', function(){
+        openSection("save-area");
+    })
+})
+
+addYrBtn.addEventListener('click', function(){
+    const clone = document.importNode(yrTemplate.content, true);
+    const fieldLength = yrContainer.getElementsByClassName("new-year").length;
+    let yearNumber = fieldLength + 1;
+    clone.querySelector(".year-title").textContent = "Year " + yearNumber;
+    yrContainer.insertBefore(clone, addYrBtn);
+})
 
 function addClass(){
-    const container = document.getElementById("class-container");
-    const template = document.getElementById("class-template");
-    const clone = document.importNode(template.content, true);
-    const fieldLength = container.getElementsByClassName("inputfield").length;
+    const clone = document.importNode(classTemplate.content, true);
+    const fieldLength = classContainer.getElementsByClassName("inputfield").length;
     let classNumber = fieldLength + 1;
     clone.querySelector(".class-name").placeholder = "Class " + classNumber;
-    container.appendChild(clone);
+    classContainer.appendChild(clone);
 }
 
 function removeClass(){
-    const container = document.getElementById("class-container");
-    const inputs = container.getElementsByClassName("inputfield");
+    const inputs = classContainer.getElementsByClassName("inputfield");
     if (inputs.length > 1) {
-        container.removeChild(inputs[inputs.length - 1]);
+        classContainer.removeChild(inputs[inputs.length - 1]);
     }
 }
 
 function clearClass(){
-    const container = document.getElementById("class-container");
-    const inputFields = container.getElementsByClassName("inputfield");
-
+    const inputFields = classContainer.getElementsByClassName("inputfield");
     Array.from(inputFields).forEach(fields => {
         let inputs = fields.getElementsByTagName("input");
         Array.from(inputs).forEach(input => {
@@ -79,28 +102,22 @@ function clearClass(){
 }
 
 function addAssignment(){
-    const container = document.getElementById("assignment-container");
-    const template = document.getElementById("assignment-template");
-    const clone = document.importNode(template.content, true);
-    const fieldLength = container.getElementsByClassName("inputfield").length;
+    const clone = document.importNode(asmntTemplate.content, true);
+    const fieldLength = asmntContainer.getElementsByClassName("inputfield").length;
     let assignmentNumber = fieldLength + 1;
     clone.querySelector(".assignment-name").placeholder = "Assignment " + assignmentNumber;
-    container.appendChild(clone);
+    asmntContainer.appendChild(clone);
 }
 
 function removeAssignment(){
-    const container = document.getElementById("assignment-container");
-    const inputs = container.getElementsByClassName("inputfield");
+    const inputs = asmntContainer.getElementsByClassName("inputfield");
     if (inputs.length > 1) {
-        container.removeChild(inputs[inputs.length - 1]);
+        asmntContainer.removeChild(inputs[inputs.length - 1]);
     }
 }
 
-
 function clearAssignment(){
-    const container = document.getElementById("assignment-container");
-    const inputFields = container.getElementsByClassName("inputfield");
-
+    const inputFields = asmntContainer.getElementsByClassName("inputfield");
     Array.from(inputFields).forEach(fields => {
         let inputs = fields.getElementsByTagName("input");
         Array.from(inputs).forEach(input => {
@@ -223,3 +240,6 @@ function calculateGrade() {
     calculatedMessage.innerText = "Your final grade is: " + finalGrade;
 }
 
+
+
+start();

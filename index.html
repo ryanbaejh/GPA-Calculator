@@ -13,9 +13,9 @@
             <div class = "contents">
                 <h2>Current Cumulatve GPA: </h2>
                 <div>
-                    <button onclick="moveFromTo('main-page', 'saved-grades')">See Saved Grades</button>
-                    <button onclick="moveFromTo('main-page', 'semester-page')">Calculate for Semester</button>
-                    <button onclick="moveFromTo('main-page', 'class-page')">Calculate for Class</button>
+                    <button onclick="moveTo('saved-grades')">See Saved Grades</button>
+                    <button onclick="moveTo('semester-page')">Calculate for Semester</button>
+                    <button onclick="moveTo('class-page')">Calculate for Class</button>
                 </div>
             </div>
         </div>
@@ -23,43 +23,53 @@
         <!--SAVED GRADES-->
         <div class="subpage" id="saved-grades">
             <button class="back-btn">Back</button>
-
-
             <div class="contents">
-                <div class="year-area">
+                <div id="year-container">
                     <div class="new-year">
-                        <h2>Year 1</h2>
-
+                        <h2 class="year-title">Year 1</h2>
                         <div class="tab-bar">
-                            <a class="tab">T1</a>
-                            <a class="tab">T2</a>
-                            <a class="tab">+</a>
+                            <button class="tab">T1</button>
+                            <button class="tab">T2</button>
+                            <button class="tab">+</button>
                         </div>
                         <div class="term" id="term-x">
                             <ol class="class-area">
-                                <li>CLASS 1: GRADE</li>
-                                <li>CLASS 2: GRADE</li>
-                                <li>CLASS 3: GRADE</li>
+                                <li class="class-list">CLASS 1: GRADE</li>
+                                <li class="class-list">CLASS 2: GRADE</li>
+                                <li class="class-list">CLASS 3: GRADE</li>
+                                <li class="class-list">CLASS 3: GRADE</li>
                             </ol>
-                            <p>Term GPA: GPA</p>
+                            <div class="edit-area">
+                                <button class="edit-btn" onclick="moveTo('semester-page')">Edit</button>
+                                <p>Term GPA: GPA</p>    
+                            </div>
                         </div>
                     </div>
-                    <button>ADD YEAR</button>
+                    <button id="add-year-btn">ADD YEAR</button>
                 </div>
                 
                 
 
-                <template>
+                <template id="yr-template">
                     <div class="new-year">
-                        <h2>Year X</h2>
-                        <h3>Semester X</h3>
-                        <ol>
-                            <li>CLASS 1: GRADE</li>
-                            <li>CLASS 2: GRADE</li>
-                            <li>CLASS 3: GRADE</li>
-                        </ol>
-                        <p>SEMESTER GPA: GPA</p>
-                        <button>Edit</button>
+                        <h2 class="year-title">Year 1</h2>
+                        <div class="tab-bar">
+                            <button class="tab">T1</button>
+                            <button class="tab">T2</button>
+                            <button class="tab">+</button>
+                        </div>
+                        <div class="term" id="term-x">
+                            <ol class="class-area">
+                                <li class="class-list">CLASS 1: GRADE</li>
+                                <li class="class-list">CLASS 2: GRADE</li>
+                                <li class="class-list">CLASS 3: GRADE</li>
+                                <li class="class-list">CLASS 3: GRADE</li>
+                            </ol>
+                            <div class="edit-area">
+                                <button class="edit-btn" onclick="moveTo('semester-page')">Edit</button>
+                                <p>Term GPA: GPA</p>    
+                            </div>
+                        </div>
                     </div>
                 </template>
             </div>
@@ -90,10 +100,12 @@
                 </div>
 
                 <div>
-                    <button id="save-sem-btn" onclick="">Save</button>
+                    <p id="final-gpa-message">Your final GPA is: </p>
                 </div>
             </div>
-            <p id="final-gpa-message">Your final GPA is: </p>
+        </div>
+        <div id="save-area">
+            <button class="save-btn" onclick="">Save</button>
         </div>
 
         <!--CLASS CALCULATOR-->
