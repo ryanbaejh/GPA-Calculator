@@ -128,3 +128,8 @@ button{
     display: block;
 }
 
+#add-delete-year-button{
+    display: flex;
+    flex-direction: column;
+}
+

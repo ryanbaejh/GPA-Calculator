@@ -26,6 +26,7 @@ function start(){
     for(let i=0; i<asmntNum; i++){
         addAssignment();
     }
+    addYear();
     
 }
 
@@ -69,12 +70,16 @@ document.querySelectorAll('.edit-btn').forEach(button => {
 })
 
 addYrBtn.addEventListener('click', function(){
+    addYear();
+})
+
+function addYear(){
     const clone = document.importNode(yrTemplate.content, true);
     const fieldLength = yrContainer.getElementsByClassName("new-year").length;
     let yearNumber = fieldLength + 1;
     clone.querySelector(".year-title").textContent = "Year " + yearNumber;
     yrContainer.insertBefore(clone, addYrBtn);
-})
+}
 
 function addClass(){
     const clone = document.importNode(classTemplate.content, true);
