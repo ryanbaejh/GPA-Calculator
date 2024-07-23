@@ -4,10 +4,12 @@ let currentSection = "main-page";
 const backBtn = document.getElementsByClassName("back-btn");
 const saveBtn = document.getElementsByClassName("save-btn");
 
+
 //Add Year Button Vars
 const addYrBtn = document.getElementById('add-year-btn');
 const yrContainer = document.getElementById('year-container');
 const yrTemplate = document.getElementById('yr-template');
+const editBtn = document.getElementsByClassName("edit-btn");
 
 //Semester Calculator Vars
 const classContainer = document.getElementById("class-container");
@@ -18,6 +20,7 @@ const asmntContainer = document.getElementById("assignment-container");
 const asmntTemplate = document.getElementById("assignment-template");
 
 function start(){
+    closeSection("save-area");
     const classNum = 3;
     const asmntNum = 3;
     for(let i=0; i<classNum; i++){
